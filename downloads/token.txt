@@ -1,3 +1,1 @@
-bnANHrHZcbm6g6CluoWX9er85S26AWH8
-
-ksDuWYeghFf034Qe5H2gyrdchtoRWPKn | ./hcloud context create EPE
+export HCLOUD_TOKEN=vedamRwA2RlFZCBxOPutszR2s6Lqc6uFp6YVucrIlVWxUwzTWCB9hSyi978JxdoN
