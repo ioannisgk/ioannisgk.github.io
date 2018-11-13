@@ -1,1 +1,2 @@
 export HCLOUD_TOKEN=vedamRwA2RlFZCBxOPutszR2s6Lqc6uFp6YVucrIlVWxUwzTWCB9hSyi978JxdoN
+sed '^ *[^ ]* *\([^ ]*\) .*/\1/'
