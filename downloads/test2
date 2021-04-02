@@ -1,6 +1,0 @@
-#!/bin/bash
-
-export MESSAGE=$(journalctl -u falco | tail -n 1)
-cat /etc/falco/card.json | envsubst > /tmp/new_card
-
-curl -X POST -H "Content-Type: application/json" -d @/tmp/new_card
