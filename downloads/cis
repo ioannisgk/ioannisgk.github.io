@@ -2,11 +2,8 @@ CIS:
 
 ==> 1a. RUN:
 
-$ sudo nano /sys/fs/cgroup/pids/docker/pids.max
-
-==> 1b. ADD:
-
-100
+$ sudo cat /sys/fs/cgroup/pids/docker/292312c6f3990403355843ab6a9cb4ab811929ddb3dc96ca5db71b566ee23968/pids.max
+$ sudo docker container update --pids-limit=100 <containerId>
 
 ===========
 
@@ -38,7 +35,6 @@ $ sudo service auditd restart
 
 ==> 3b. RUN:
 
-$ sudo touch /etc/subuid /etc/subgid
 $ sudo systemctl daemon-reload
 $ sudo systemctl restart docker
 
