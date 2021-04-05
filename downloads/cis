@@ -74,3 +74,36 @@ $ sudo docker swarm update --autolock=true
 # save the key: SWMKEY-1-DL0XUYipniJ7St2cQyw08bg5bVoV/2PInWe7K4csDXA
 $ sudo docker swarm unlock
 
+==> 7. RUN:
+
+$ sudo mkdir -p /etc/docker/policies
+$ sudo nano /etc/docker/policies/authz.rego
+
+ADD:
+
+package docker.authz
+allow = true
+
+RUN:
+
+$ sudo docker plugin install openpolicyagent/opa-docker-authz-v2:0.4 opa-args="-policy-file /opa/policies/authz.rego"
+$ sudo nano /etc/docker/daemon.json
+
+ADD:
+
+"authorization-plugins": ["openpolicyagent/opa-docker-authz-v2:0.4"]
+
+RUN:
+
+$ sudo kill -HUP $(pidof dockerd)
+$ sudo docker ps
+
+INFO:
+
+https://www.openpolicyagent.org/docs/latest/docker-authorization/
+
+
+
+
+
+
