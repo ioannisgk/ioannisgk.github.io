@@ -10,7 +10,7 @@ $ sudo nano /sys/fs/cgroup/pids/docker/pids.max
 
 ===========
 
-==> 2a. ADD: /etc/audit/audit.rules file:
+==> 2a. ADD: /etc/audit/rules.d/audit.rules file:
 
 -w /usr/bin/dockerd -k docker
 -w /var/lib/docker -k docker
@@ -33,8 +33,6 @@ $ sudo service auditd restart
 
 "icc": false,
 "log-level": "info",
-"userns-remap": "default",
-"live-restore": "true",
 "userland-proxy": false,
 "no-new-privileges": true
 
