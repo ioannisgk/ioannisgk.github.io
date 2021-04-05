@@ -1,0 +1,82 @@
+CIS:
+
+==> 1a. RUN:
+
+$ sudo nano /sys/fs/cgroup/pids/docker/pids.max
+
+==> 1b. ADD:
+
+100
+
+===========
+
+==> 2a. ADD: /etc/audit/audit.rules file:
+
+-w /usr/bin/dockerd -k docker
+-w /var/lib/docker -k docker
+-w /etc/docker -k docker
+-w /usr/lib/systemd/system/docker.service -k docker
+-w /usr/lib/systemd/system/docker.socket -k docker
+-w /etc/default/docker -k docker
+-w /etc/sysconfig/docker -k docker
+-w /etc/docker/daemon.json -k docker
+-w /usr/bin/containerd -k docker
+-w /usr/sbin/runc -k docker
+
+==> 2b. RUN:
+
+$ sudo service auditd restart
+
+===========
+
+==> 3a. ADD: /etc/docker/daemon.json file:
+
+"icc": false,
+"log-level": "info",
+"userns-remap": "default",
+"live-restore": "true",
+"userland-proxy": false,
+"no-new-privileges": true
+
+==> 3b. RUN:
+
+$ sudo touch /etc/subuid /etc/subgid
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+
+===========
+ 
+==> 4. RUN:
+
+$ sudo mkdir /etc/default/docker
+$ sudo chown root:root /etc/default/docker
+$ sudo chmod 644 /etc/default/docker
+$ sudo mkdir /etc/sysconfig/docker
+$ sudo chown root:root /etc/sysconfig/docker
+$ sudo chmod 644 /etc/sysconfig/docker
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+
+===========
+
+==> 5a. RUN:
+
+$ sudo touch /etc/profile.d/docker.sh
+$ sudo nano /etc/profile.d/docker.sh
+
+==> 5b. ADD:
+
+export DOCKER_CONTENT_TRUST=1
+
+==> 5c. RUN:
+
+$ sudo chmod 0755 /etc/profile.d/docker.sh
+
+===========
+
+==> 6. RUN:
+
+$ sudo docker swarm update --autolock=true
+# save the key: SWMKEY-1-DL0XUYipniJ7St2cQyw08bg5bVoV/2PInWe7K4csDXA
+$ sudo docker swarm unlock
+
