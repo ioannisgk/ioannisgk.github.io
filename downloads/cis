@@ -105,7 +105,11 @@ https://www.openpolicyagent.org/docs/latest/docker-authorization/
 ==> 8. RUN:
 
 containers = sh(returnStdout: true, script: 'docker ps --format {{.ID}}').trim()
+containersArray = containers.split('\n')
 
-
-
+for ( String currentContainer : containersArray ) {            
+  sh """
+    docker container update --pids-limit=100 $currentContainer 
+  """
+}
 
