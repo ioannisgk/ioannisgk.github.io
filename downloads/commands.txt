@@ -6,7 +6,7 @@ Install Docker Engine on Ubuntu: https://docs.docker.com/engine/install/ubuntu/
 Install DOcker COmpose on Ubuntu: https://docs.docker.com/compose/install/
 
 1. Setup the MOngoDB database (create a folder "data"):
-sudo docker run --detach  -p 27017:27017  --name mongodb  --volume /home/user1/Downloads/data:/data/db  mongo
+sudo docker run --detach -p 27017:27017 --name mongodb --volume /home/user1/Downloads/data:/data/db  mongo
 
 2. Project management API (download repo "vm4sec-dashboard-project-api-master"):
 sudo docker-compose up --build -d
