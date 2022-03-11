@@ -26,7 +26,7 @@ http://localhost:5002
 
 (update .env file with the IP 127.0.0.1)
 cp ./.env-default ./.env
-sudo docker run -it --publish 3000:3000 --name vm4sec-dashboard -mount src=/home/user1/Downloads/vm4sec-dashboard-master,target=/mounted_folder,type=bind node
+sudo docker run -it --publish 3000:3000 --name vm4sec-dashboard --mount src=/home/user1/Downloads/vm4sec-dashboard-master,target=/mounted_folder,type=bind node
 
 sudo docker exec -it vm4sec-dashboard bash
 cd mounted_folder
