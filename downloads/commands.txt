@@ -1,0 +1,32 @@
+https://gitlab.seis.iti.gr/vm4sec-wiki/wiki-home/-/wikis/home
+
+1. Dashboard (download repo "vm4sec-dashboard-master", create folder "data" outside the main folder):
+
+cp ./.env-default ./.env
+sudo docker run -it   --publish 3000:3000   --name vm4sec-dashboard   --mount src=/home/user1/Downloads/vm4sec-dashboard-master,target=/mounted_folder,type=bind  node
+sudo docker run --detach  -p 27017:27017  --name mongodb  --volume /home/user1/Downloads/data:/data/db  mongo
+
+sudo docker exec -it vm4sec-dashboard bash
+cd mounted_folder
+npm install
+export NODE_OPTIONS=--openssl-legacy-provider
+npm start
+
+http://localhost:3000/ 
+
+2. Project management API (download repo "vm4sec-dashboard-project-api-master"):
+
+sudo docker-compose up --build -d
+http://localhost:3005/swagger/index.html
+
+3. Quantitative security assessment:
+
+sudo docker run -p 8088:8080 --name vm4sec-qsa -e DB_IP=127.0.0.1 -e DB_PORT=27017  -d siavvasm/vm4sec-security-assessment:vm4sec-test bash ./catalina.sh run
+http://localhost:8088
+
+4. Vulnerability Prediction:
+
+sudo docker pull iliakalo/vp-tool:latest
+sudo docker run -it --name vp-tool -p 5002:5002 iliakalo/vp-tool bash
+python vp_service.py 127.0.0.1 27017 
+http://localhost:5002
