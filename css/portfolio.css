@@ -120,6 +120,8 @@ caption {
   height: auto;
 }
 
+
+
 .glyphicon {
   position: relative;
   top: 1px;
@@ -131,6 +133,10 @@ caption {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-new-window:before {
+  content: "\e164";
 }
 
 a[target="_blank"]:after
